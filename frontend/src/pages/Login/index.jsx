@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/Context';
 import { loginUser, validarToken } from '../../api/user';
+import { toast } from 'react-toastify';
 import './styles.css';
 
 export default function Login() {
@@ -30,14 +31,7 @@ export default function Login() {
                 setIsVerifyEmail(true);
             }
         } catch (error) {
-            console.log(error);
-            if (error.response.status === 403) {
-                return toast("Sem permissão.");
-            }
-            if (error.response.status === 401 || error.response.status === 404) {
-                return toast('Email ou senha inválido, tente novamente!');
-            }
-            return toast('Erro inesperado, tente novamente mais tarde!');
+            return toast(error.response.data.error);
         }
     };
 
@@ -54,8 +48,8 @@ export default function Login() {
                 login(token);
                 return navigate('/');
             }
-        } catch (e) {
-            toast(e);
+        } catch (error) {
+            toast(error.response.data.error);
         }
     };
 

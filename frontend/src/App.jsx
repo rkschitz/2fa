@@ -8,6 +8,8 @@ import PrivateRoute from './components/PrivateRoute';
 import React, { useEffect } from 'react';
 import Layout from './components/Layout/index';
 import Profile from './pages/Profile';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
@@ -32,6 +34,18 @@ function App() {
         {user ? '' : <Route path="/login" element={<Login />} />}
         {user ? '' : <Route path="/register" element={<Register />} />}
       </Routes>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{ width: "50%" }}
+      />
     </AuthProvider>
   )
 }

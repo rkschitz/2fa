@@ -126,8 +126,8 @@ class UserController {
 
   // Método de verificação de e-mail
   async verificarEmailToken(token) {
-    const decoded = jwt.verify(token, SECRET_KEY);
     try {
+      const decoded = jwt.verify(token, SECRET_KEY);
       return { message: "Autenticação bem-sucedida!", email: decoded.email };
     } catch (error) {
       throw new Error("Token inválido ou expirado.");
